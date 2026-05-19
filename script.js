@@ -2,7 +2,7 @@ const WPP = '5581998628808';
 const sizes = ['P', 'M', 'G', 'GG', 'XGG'];
 const PER_PAGE = 12;
 
-let currentFilter = 'principais';
+let currentFilter = 'todos';
 let currentSearch = '';
 let selectedSize = '';
 let currentProduct = null;
@@ -12,7 +12,7 @@ const QS_TOTAL = 4;
 let qsTimer = null;
 
 /* ══════════════════════
-   QUEM SOMOS
+   QUEM SOMOS SLIDER
 ══════════════════════ */
 function goQS(index) {
   qsIndex = index;
@@ -36,9 +36,7 @@ function resetQSTimer() {
 ══════════════════════ */
 function getFiltered() {
   return produtos.filter(p => {
-    const matchLiga = currentFilter === 'principais'
-      ? p.tipo === 'Home'
-      : p.liga === currentFilter;
+    const matchLiga = currentFilter === 'todos' ? true : p.liga === currentFilter;
     const matchSearch = (p.time + ' ' + p.nome)
       .toLowerCase().includes(currentSearch.toLowerCase());
     return matchLiga && matchSearch;
@@ -66,23 +64,29 @@ function scrollToCatalog() {
 }
 
 /* ══════════════════════
-   RENDER
+   TIPO LABEL
 ══════════════════════ */
 function tipoLabel(tipo) {
- if (tipo === 'Home') return 'Pra Encomenda'
- return tipo;
+  if (tipo === 'Home') return 'Pra Encomenda';
+  if (tipo === 'Away') return 'Away';
+  if (tipo === 'Retrô') return 'Retrô';
+  return tipo;
 }
 
+/* ══════════════════════
+   RENDER GRID
+══════════════════════ */
 function renderGrid() {
   const all = getFiltered();
-  const totalPages = Math.ceil(all.length / PER_PAGE);
+  const totalPages = Math.max(1, Math.ceil(all.length / PER_PAGE));
   if (currentPage > totalPages) currentPage = 1;
 
   const start = (currentPage - 1) * PER_PAGE;
   const list = all.slice(start, start + PER_PAGE);
 
   const grid = document.getElementById('grid');
-  document.getElementById('countLabel').textContent = `${all.length} produto${all.length !== 1 ? 's' : ''}`;
+  document.getElementById('countLabel').textContent =
+    `${all.length} produto${all.length !== 1 ? 's' : ''}`;
 
   if (all.length === 0) {
     grid.innerHTML = `
@@ -98,12 +102,12 @@ function renderGrid() {
     <div class="card" onclick="openModal(${p.id})">
       <div class="card-img">
         <span class="liga-tag">${p.ligaLabel}</span>
-        <span class="tipo-tag tipo-${p.tipo.toLowerCase()}">${tipoLabel(p.tipo)}</span>
         <img src="${p.img}" alt="${p.time} - ${p.nome}" loading="lazy">
       </div>
       <div class="card-body">
         <div class="card-team">${p.time}</div>
         <div class="card-name">${p.nome}</div>
+        <div class="card-tipo">${tipoLabel(p.tipo)}</div>
         <div class="card-footer">
           <div>
             <div class="price-pix">R$ 99,99 <span class="price-label-small">no Pix</span></div>
@@ -197,6 +201,13 @@ function closeModalBtn() {
   document.getElementById('modal').classList.remove('open');
   document.body.style.overflow = '';
 }
+
+/* ══════════════════════
+   TECLADO
+══════════════════════ */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModalBtn();
+});
 
 /* ══════════════════════
    INIT

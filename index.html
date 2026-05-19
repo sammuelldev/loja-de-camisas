@@ -15,9 +15,6 @@
       <img src="logo.png" alt="Arquibancada Store" class="nav-logo">
     </a>
     <div class="nav-links">
-      <a href="#" class="active" onclick="setFilter('principais', this); return false;">
-        <span class="nav-text">⭐ Principais</span>
-      </a>
       <a href="#" onclick="setFilter('brasileirao', this); return false;" title="Brasileirão">
         <img src="icon-brasileirao.png" alt="Brasileirão" class="liga-icon">
       </a>
@@ -29,6 +26,12 @@
       </a>
       <a href="#" onclick="setFilter('bundesliga', this); return false;" title="Bundesliga">
         <img src="icon-bundesliga.png" alt="Bundesliga" class="liga-icon">
+      </a>
+      <a href="#" onclick="setFilter('seriea', this); return false;" title="Série A">
+        <img src="icon-seriea.png" alt="Série A" class="liga-icon">
+      </a>
+      <a href="#" onclick="setFilter('ligue1', this); return false;" title="Ligue 1">
+        <img src="icon-ligue1.png" alt="Ligue 1" class="liga-icon">
       </a>
       <a href="#" onclick="setFilter('selecoes', this); return false;" title="Seleções">
         <img src="icon-selecoes.png" alt="Seleções" class="liga-icon">
@@ -58,8 +61,8 @@
 
   <!-- FILTER BAR -->
   <div class="filter-bar">
-    <button class="filter-btn active" onclick="setFilter('principais', this)">
-      <span>⭐ Principais</span>
+    <button class="filter-btn active" onclick="setFilter('todos', this)">
+      <span>🌎 Todos</span>
     </button>
     <button class="filter-btn" onclick="setFilter('brasileirao', this)" title="Brasileirão">
       <img src="icon-brasileirao.png" alt="Brasileirão" class="filter-icon">
@@ -72,6 +75,12 @@
     </button>
     <button class="filter-btn" onclick="setFilter('bundesliga', this)" title="Bundesliga">
       <img src="icon-bundesliga.png" alt="Bundesliga" class="filter-icon">
+    </button>
+    <button class="filter-btn" onclick="setFilter('seriea', this)" title="Série A">
+      <img src="icon-seriea.png" alt="Série A" class="filter-icon">
+    </button>
+    <button class="filter-btn" onclick="setFilter('ligue1', this)" title="Ligue 1">
+      <img src="icon-ligue1.png" alt="Ligue 1" class="filter-icon">
     </button>
     <button class="filter-btn" onclick="setFilter('selecoes', this)" title="Seleções">
       <img src="icon-selecoes.png" alt="Seleções" class="filter-icon">
@@ -138,8 +147,8 @@
       </div>
 
     </div>
-    <button class="qs-arrow qs-prev" onclick="slideQS(-1)">&#8592;</button>
-    <button class="qs-arrow qs-next" onclick="slideQS(1)">&#8594;</button>
+    <button class="qs-arrow qs-prev" onclick="slideQS(-1)" aria-label="Anterior">&#8592;</button>
+    <button class="qs-arrow qs-next" onclick="slideQS(1)" aria-label="Próximo">&#8594;</button>
     <div class="qs-dots" id="qsDots">
       <span class="qs-dot active" onclick="goQS(0)"></span>
       <span class="qs-dot" onclick="goQS(1)"></span>
@@ -155,7 +164,7 @@
         <span class="section-eyebrow">🛍️ Catálogo</span>
         <div class="section-title">TODOS OS PRODUTOS</div>
       </div>
-      <div class="count" id="countLabel">20 produtos</div>
+      <div class="count" id="countLabel">0 produtos</div>
     </div>
     <div class="grid" id="grid"></div>
     <div class="pagination" id="pagination"></div>

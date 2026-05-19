@@ -65,12 +65,13 @@ function scrollToCatalog() {
 
 /* ══════════════════════
    TIPO LABEL
+   — Hoje tudo é "Pra Encomenda".
+   — Quando houver pronta entrega, mude o tipo no produtos.js
+     para 'ProntaEntrega' e adicione o caso abaixo.
 ══════════════════════ */
 function tipoLabel(tipo) {
-  if (tipo === 'Home') return 'Pra Encomenda';
-  if (tipo === 'Away') return 'Away';
-  if (tipo === 'Retrô') return 'Retrô';
-  return tipo;
+  if (tipo === 'ProntaEntrega') return 'Pronta Entrega';
+  return 'Pra Encomenda';
 }
 
 /* ══════════════════════

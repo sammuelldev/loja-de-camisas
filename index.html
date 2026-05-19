@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arquibancada Store</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo-img-wrap">
+      <img src="logo.png" alt="Arquibancada Store" class="nav-logo">
+    </a>
+    <div class="nav-links">
+      <a href="#" class="active" onclick="setFilter('principais', this); return false;">
+        <span class="nav-text">⭐ Principais</span>
+      </a>
+      <a href="#" onclick="setFilter('brasileirao', this); return false;" title="Brasileirão">
+        <img src="icon-brasileirao.png" alt="Brasileirão" class="liga-icon">
+      </a>
+      <a href="#" onclick="setFilter('laliga', this); return false;" title="La Liga">
+        <img src="icon-laliga.png" alt="La Liga" class="liga-icon">
+      </a>
+      <a href="#" onclick="setFilter('premier', this); return false;" title="Premier League">
+        <img src="icon-premier.png" alt="Premier League" class="liga-icon">
+      </a>
+      <a href="#" onclick="setFilter('bundesliga', this); return false;" title="Bundesliga">
+        <img src="icon-bundesliga.png" alt="Bundesliga" class="liga-icon">
+      </a>
+      <a href="#" onclick="setFilter('selecoes', this); return false;" title="Seleções">
+        <img src="icon-selecoes.png" alt="Seleções" class="liga-icon">
+      </a>
+    </div>
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Buscar time..." id="searchInput" oninput="filterProducts()">
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-logo-wrap">
+        <img src="logo.png" alt="Arquibancada Store" class="hero-logo">
+      </div>
+      <p>Camisas dos maiores clubes do mundo. Qualidade premium e atendimento pelo WhatsApp.</p>
+      <div class="hero-badges">
+        <span class="badge green">💬 Suporte via WhatsApp</span>
+        <span class="badge">💸 Pix com Desconto</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="setFilter('principais', this)">
+      <span>⭐ Principais</span>
+    </button>
+    <button class="filter-btn" onclick="setFilter('brasileirao', this)" title="Brasileirão">
+      <img src="icon-brasileirao.png" alt="Brasileirão" class="filter-icon">
+    </button>
+    <button class="filter-btn" onclick="setFilter('laliga', this)" title="La Liga">
+      <img src="icon-laliga.png" alt="La Liga" class="filter-icon">
+    </button>
+    <button class="filter-btn" onclick="setFilter('premier', this)" title="Premier League">
+      <img src="icon-premier.png" alt="Premier League" class="filter-icon">
+    </button>
+    <button class="filter-btn" onclick="setFilter('bundesliga', this)" title="Bundesliga">
+      <img src="icon-bundesliga.png" alt="Bundesliga" class="filter-icon">
+    </button>
+    <button class="filter-btn" onclick="setFilter('selecoes', this)" title="Seleções">
+      <img src="icon-selecoes.png" alt="Seleções" class="filter-icon">
+    </button>
+  </div>
+
+  <!-- QUEM SOMOS -->
+  <section class="quem-somos">
+    <div class="qs-track" id="qsTrack">
+
+      <div class="qs-slide" style="--slide-bg: url('qs-1.jpg')">
+        <div class="qs-overlay"></div>
+        <div class="qs-content">
+          <h2 class="qs-title">Mais que<br><em>Futebol</em></h2>
+          <p class="qs-text">Futebol não é só esporte. É identidade, é raiz, é torcida que vibra junto. A Arquibancada Store nasceu dessa paixão — pra você vestir o que sente com qualidade de verdade.</p>
+          <a class="qs-btn" href="#catalogo" onclick="scrollToCatalog()">Ver Catálogo</a>
+        </div>
+      </div>
+
+      <div class="qs-slide" style="--slide-bg: url('qs-2.jpg')">
+        <div class="qs-overlay"></div>
+        <div class="qs-content">
+          <h2 class="qs-title">Qualidade<br><em>Premium</em></h2>
+          <p class="qs-text">Cada camisa é selecionada com critério. Tecido respirável, acabamento impecável e estampa fiel ao original. Você merece o melhor — e a gente entrega isso.</p>
+          <a class="qs-btn" href="#catalogo" onclick="scrollToCatalog()">Ver Catálogo</a>
+        </div>
+      </div>
+
+      <div class="qs-slide" style="--slide-bg: url('qs-3.jpg')">
+        <div class="qs-overlay"></div>
+        <div class="qs-content">
+          <h2 class="qs-title">Entrega<br><em>Rápida</em></h2>
+          <p class="qs-text">Comprou, vai chegar. Envio ágil, rastreamento e suporte direto pelo WhatsApp. Atendimento humano, sem robô, do começo ao fim do pedido.</p>
+          <a class="qs-btn" href="https://wa.me/5581998628808" target="_blank">Falar no WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="qs-slide" style="--slide-bg: url('qs-4.jpg')">
+        <div class="qs-overlay"></div>
+        <div class="qs-content">
+          <h2 class="qs-title">Arquibancada<br><em>é Sentimento</em></h2>
+          <p class="qs-text">Da torcida organizada ao sofá de casa. Da fumaça colorida ao grito no estádio. Ser da Arquibancada Store é carregar o futebol onde for.</p>
+          <a class="qs-btn" href="#catalogo" onclick="scrollToCatalog()">Ver Catálogo</a>
+        </div>
+      </div>
+
+    </div>
+    <button class="qs-arrow qs-prev" onclick="slideQS(-1)">&#8592;</button>
+    <button class="qs-arrow qs-next" onclick="slideQS(1)">&#8594;</button>
+    <div class="qs-dots" id="qsDots">
+      <span class="qs-dot active" onclick="goQS(0)"></span>
+      <span class="qs-dot" onclick="goQS(1)"></span>
+      <span class="qs-dot" onclick="goQS(2)"></span>
+      <span class="qs-dot" onclick="goQS(3)"></span>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO -->
+  <div class="main" id="catalogo">
+    <div class="section-header">
+      <div class="section-left">
+        <span class="section-eyebrow">🛍️ Catálogo</span>
+        <div class="section-title">TODOS OS PRODUTOS</div>
+      </div>
+      <div class="count" id="countLabel">20 produtos</div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo-wrap">
+      <img src="logo.png" alt="Arquibancada Store" class="footer-logo-img">
+    </div>
+    <p class="footer-copy">© 2025 Arquibancada Store · Todos os direitos reservados</p>
+    <a class="footer-wpp" href="https://wa.me/5581998628808" target="_blank">
+      <img src="icon-wpp.png" alt="WhatsApp" class="wpp-icon">
+      <span>(81) 9 98628-808</span>
+    </a>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModalBtn()">✕</button>
+      <div class="modal-img-wrap">
+        <img id="modalImg" src="" alt="">
+      </div>
+      <div class="modal-info">
+        <div class="modal-liga" id="modalLiga"></div>
+        <div class="modal-team" id="modalTeam"></div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-prices">
+          <div class="modal-price-row">
+            <span class="modal-price-label">💳 Cartão</span>
+            <div>
+              <span class="modal-price-val">R$ 109,99</span>
+              <span class="modal-price-sub">até 3x</span>
+            </div>
+          </div>
+          <div class="modal-price-row">
+            <span class="modal-price-label">💸 Pix</span>
+            <span class="modal-price-val pix">R$ 99,99</span>
+          </div>
+        </div>
+        <div class="size-label">Escolha o tamanho</div>
+        <div class="sizes" id="modalSizes"></div>
+        <a class="btn-wpp-modal" id="modalWppBtn" href="#" target="_blank">
+          💬 Comprar pelo WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="produtos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

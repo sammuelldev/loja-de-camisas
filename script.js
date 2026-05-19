@@ -1,16 +1,18 @@
 const WPP = '5581998628808';
 const sizes = ['P', 'M', 'G', 'GG', 'XGG'];
+const PER_PAGE = 12;
 
 let currentFilter = 'principais';
 let currentSearch = '';
 let selectedSize = '';
 let currentProduct = null;
+let currentPage = 1;
 let qsIndex = 0;
 const QS_TOTAL = 4;
 let qsTimer = null;
 
 /* ══════════════════════
-   QUEM SOMOS CAROUSEL
+   QUEM SOMOS
 ══════════════════════ */
 function goQS(index) {
   qsIndex = index;
@@ -35,7 +37,7 @@ function resetQSTimer() {
 function getFiltered() {
   return produtos.filter(p => {
     const matchLiga = currentFilter === 'principais'
-      ? p.tipo === 'Titular'
+      ? p.tipo === 'Home'
       : p.liga === currentFilter;
     const matchSearch = (p.time + ' ' + p.nome)
       .toLowerCase().includes(currentSearch.toLowerCase());
@@ -45,6 +47,7 @@ function getFiltered() {
 
 function setFilter(liga, btn) {
   currentFilter = liga;
+  currentPage = 1;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
@@ -54,6 +57,7 @@ function setFilter(liga, btn) {
 
 function filterProducts() {
   currentSearch = document.getElementById('searchInput').value;
+  currentPage = 1;
   renderGrid();
 }
 
@@ -65,20 +69,28 @@ function scrollToCatalog() {
    RENDER
 ══════════════════════ */
 function tipoLabel(tipo) {
-  return tipo === 'Titular' ? 'Pra Encomenda' : tipo;
+ if (tipo === 'Home') return 'Pra Encomenda'
+ return tipo;
 }
 
 function renderGrid() {
-  const list = getFiltered();
-  const grid = document.getElementById('grid');
-  document.getElementById('countLabel').textContent = `${list.length} produto${list.length !== 1 ? 's' : ''}`;
+  const all = getFiltered();
+  const totalPages = Math.ceil(all.length / PER_PAGE);
+  if (currentPage > totalPages) currentPage = 1;
 
-  if (list.length === 0) {
+  const start = (currentPage - 1) * PER_PAGE;
+  const list = all.slice(start, start + PER_PAGE);
+
+  const grid = document.getElementById('grid');
+  document.getElementById('countLabel').textContent = `${all.length} produto${all.length !== 1 ? 's' : ''}`;
+
+  if (all.length === 0) {
     grid.innerHTML = `
       <div style="grid-column:1/-1;text-align:center;padding:80px 0;color:#444;">
         <div style="font-size:48px;margin-bottom:16px;">🔍</div>
         <div style="font-size:16px;">Nenhum produto encontrado</div>
       </div>`;
+    renderPagination(0);
     return;
   }
 
@@ -86,7 +98,7 @@ function renderGrid() {
     <div class="card" onclick="openModal(${p.id})">
       <div class="card-img">
         <span class="liga-tag">${p.ligaLabel}</span>
-        <span class="tipo-tag">${tipoLabel(p.tipo)}</span>
+        <span class="tipo-tag tipo-${p.tipo.toLowerCase()}">${tipoLabel(p.tipo)}</span>
         <img src="${p.img}" alt="${p.time} - ${p.nome}" loading="lazy">
       </div>
       <div class="card-body">
@@ -104,6 +116,29 @@ function renderGrid() {
       </div>
     </div>
   `).join('');
+
+  renderPagination(totalPages);
+}
+
+/* ══════════════════════
+   PAGINAÇÃO
+══════════════════════ */
+function renderPagination(totalPages) {
+  const el = document.getElementById('pagination');
+  if (totalPages <= 1) { el.innerHTML = ''; return; }
+
+  let html = `<button class="page-btn arrow" onclick="goPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>&#8592;</button>`;
+  for (let i = 1; i <= totalPages; i++) {
+    html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goPage(${i})">${i}</button>`;
+  }
+  html += `<button class="page-btn arrow" onclick="goPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>&#8594;</button>`;
+  el.innerHTML = html;
+}
+
+function goPage(page) {
+  currentPage = page;
+  renderGrid();
+  document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
 }
 
 /* ══════════════════════

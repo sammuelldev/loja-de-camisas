@@ -4,25 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arquibancada Store — Camisas Premium de Futebol</title>
-
-  <!-- SEO -->
   <meta name="description" content="Camisas dos maiores clubes do mundo. Qualidade premium, atendimento via WhatsApp e pagamento no Pix com desconto.">
   <meta name="keywords" content="camisas de futebol, camisas premium, futebol, Brasileirão, Premier League, La Liga, Bundesliga, Ligue 1, Série A, Seleções">
   <meta name="robots" content="index, follow">
-
-  <!-- Open Graph -->
   <meta property="og:title" content="Arquibancada Store — Camisas Premium de Futebol">
   <meta property="og:description" content="Camisas dos maiores clubes do mundo. Qualidade premium, atendimento via WhatsApp e Pix com desconto.">
   <meta property="og:image" content="hero-bg.jpg">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Arquibancada Store — Camisas Premium de Futebol">
   <meta name="twitter:description" content="Camisas dos maiores clubes do mundo. Qualidade premium e atendimento pelo WhatsApp.">
   <meta name="twitter:image" content="hero-bg.jpg">
-
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -56,9 +49,16 @@
         <img src="icon-selecoes.png" alt="Seleções" class="liga-icon">
       </a>
     </div>
-    <div class="search-box">
-      <span class="search-icon">🔍</span>
-      <input type="text" placeholder="Buscar time..." id="searchInput" oninput="filterProducts()">
+    <div class="nav-right">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Buscar time..." id="searchInput" oninput="filterProducts()">
+      </div>
+      <!-- BOTÃO CARRINHO NA NAV -->
+      <button class="nav-cart-btn" onclick="openCart()" aria-label="Carrinho">
+        🛒
+        <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+      </button>
     </div>
   </nav>
 
@@ -197,11 +197,39 @@
   </footer>
 
   <!-- BOTÃO FLUTUANTE WHATSAPP -->
+  <!-- Para trocar o ícone: substitua "icon-wpp.png" pelo nome da sua imagem -->
   <a class="wpp-float" href="https://wa.me/5581998628808" target="_blank" aria-label="Falar no WhatsApp">
     <img src="icon-wpp.png" alt="WhatsApp">
   </a>
 
-  <!-- PÁGINA DO PRODUTO (substitui o modal antigo) -->
+  <!-- TOAST -->
+  <div class="cart-toast" id="cartToast"></div>
+
+  <!-- CARRINHO DRAWER -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <div class="cart-title">🛒 Carrinho</div>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛒</div>
+        <div>Seu carrinho está vazio</div>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total no Pix</span>
+        <span class="cart-total" id="cartTotal">R$ 0,00</span>
+      </div>
+      <button class="cart-checkout-btn" onclick="checkoutCart()">
+        💬 Finalizar pelo WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <!-- PÁGINA DO PRODUTO -->
   <div class="product-page" id="productPage"></div>
 
   <script src="produtos.js"></script>

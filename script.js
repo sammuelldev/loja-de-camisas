@@ -13,6 +13,122 @@ let qsTimer = null;
 let galleryIndex = 0;
 
 /* ══════════════════════
+   CARRINHO
+══════════════════════ */
+let cart = [];
+
+function addToCart(product, size) {
+  if (!size) {
+    showCartToast('⚠️ Selecione um tamanho primeiro');
+    return;
+  }
+  const existing = cart.find(i => i.id === product.id && i.size === size);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ id: product.id, time: product.time, nome: product.nome, img: product.img, size, qty: 1, price: 99.99 });
+  }
+  renderCart();
+  openCart();
+  showCartToast('✅ Adicionado ao carrinho!');
+}
+
+function removeFromCart(id, size) {
+  cart = cart.filter(i => !(i.id === id && i.size === size));
+  renderCart();
+}
+
+function changeQty(id, size, delta) {
+  const item = cart.find(i => i.id === id && i.size === size);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(id, size);
+  else renderCart();
+}
+
+function cartTotal() {
+  return cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+}
+
+function renderCart() {
+  const el = document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartTotal');
+  const badge = document.getElementById('cartBadge');
+  const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+
+  badge.textContent = totalQty;
+  badge.style.display = totalQty > 0 ? 'flex' : 'none';
+
+  if (cart.length === 0) {
+    el.innerHTML = `
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛒</div>
+        <div>Seu carrinho está vazio</div>
+      </div>`;
+    totalEl.textContent = 'R$ 0,00';
+    return;
+  }
+
+  el.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-img">
+        <img src="${item.img}" alt="${item.nome}">
+      </div>
+      <div class="cart-item-info">
+        <div class="cart-item-team">${item.time}</div>
+        <div class="cart-item-name">${item.nome}</div>
+        <div class="cart-item-size">Tamanho: <strong>${item.size}</strong></div>
+        <div class="cart-item-price">R$ ${(item.price * item.qty).toFixed(2).replace('.', ',')}</div>
+        <div class="cart-item-qty">
+          <button onclick="changeQty(${item.id}, '${item.size}', -1)">−</button>
+          <span>${item.qty}</span>
+          <button onclick="changeQty(${item.id}, '${item.size}', 1)">+</button>
+          <button class="cart-item-remove" onclick="removeFromCart(${item.id}, '${item.size}')">🗑</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  totalEl.textContent = `R$ ${cartTotal().toFixed(2).replace('.', ',')}`;
+}
+
+function buildCartMsg() {
+  const lines = cart.map(i =>
+    `👕 *${i.time} - ${i.nome}*\n   Tamanho: ${i.size} | Qtd: ${i.qty} | R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}`
+  ).join('\n\n');
+  const total = cartTotal().toFixed(2).replace('.', ',');
+  return encodeURIComponent(
+    `Olá! Gostaria de fazer o seguinte pedido:\n\n${lines}\n\n` +
+    `💰 *Total no Pix: R$ ${total}*\n\n` +
+    `Poderia me passar mais informações para finalizar?`
+  );
+}
+
+function checkoutCart() {
+  if (cart.length === 0) return;
+  window.open(`https://wa.me/${WPP}?text=${buildCartMsg()}`, '_blank');
+}
+
+function openCart() {
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showCartToast(msg) {
+  const t = document.getElementById('cartToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+/* ══════════════════════
    MAPA DE LABELS
 ══════════════════════ */
 const ligaLabels = {
@@ -53,7 +169,7 @@ function updateHeroBg(liga) {
 }
 
 /* ══════════════════════
-   VISIBILIDADE — carrossel e aviso só no "todos"
+   VISIBILIDADE
 ══════════════════════ */
 function updateSectionsVisibility(liga) {
   const qs  = document.querySelector('.quem-somos');
@@ -240,11 +356,11 @@ const descricoes = {
 };
 
 const medidas = [
-  { tam: 'P',   altura: '165–170', peito: '88–92',  cintura: '76–80' },
-  { tam: 'M',   altura: '170–175', peito: '92–96',  cintura: '80–84' },
-  { tam: 'G',   altura: '175–180', peito: '96–100', cintura: '84–88' },
-  { tam: 'GG',  altura: '180–185', peito: '100–104',cintura: '88–92' },
-  { tam: 'XGG', altura: '185–190', peito: '104–110',cintura: '92–98' },
+  { tam: 'P',   altura: '165–170', peito: '88–92',   cintura: '76–80' },
+  { tam: 'M',   altura: '170–175', peito: '92–96',   cintura: '80–84' },
+  { tam: 'G',   altura: '175–180', peito: '96–100',  cintura: '84–88' },
+  { tam: 'GG',  altura: '180–185', peito: '100–104', cintura: '88–92' },
+  { tam: 'XGG', altura: '185–190', peito: '104–110', cintura: '92–98' },
 ];
 
 function openModal(id) {
@@ -252,15 +368,14 @@ function openModal(id) {
   selectedSize   = '';
   galleryIndex   = 0;
 
-  const p      = currentProduct;
-  const descr  = descricoes[p.tipo] || descricoes.Home;
-  const imgs   = p.imgs || [p.img]; // suporta múltiplas imagens ou fallback para uma
+  const p     = currentProduct;
+  const descr = descricoes[p.tipo] || descricoes.Home;
+  const imgs  = p.imgs || [p.img];
 
   const page = document.getElementById('productPage');
   page.innerHTML = `
     <div class="pp-inner">
 
-      <!-- FECHAR -->
       <button class="pp-close" onclick="closePage()">✕</button>
 
       <!-- GALERIA -->
@@ -274,8 +389,7 @@ function openModal(id) {
           ${imgs.map((src, i) => `
             <div class="pp-thumb ${i === 0 ? 'active' : ''}" onclick="setGalleryImg(${i})">
               <img src="${src}" alt="">
-            </div>
-          `).join('')}
+            </div>`).join('')}
         </div>` : ''}
       </div>
 
@@ -285,7 +399,6 @@ function openModal(id) {
         <div class="pp-team">${p.time}</div>
         <h1 class="pp-title">${p.nome}</h1>
         <div class="pp-tipo">${tipoLabel(p.tipo)}</div>
-
         <p class="pp-descr">${descr}</p>
 
         <!-- PREÇOS -->
@@ -318,27 +431,35 @@ function openModal(id) {
             </thead>
             <tbody>
               ${medidas.map(m => `
-                <tr class="${m.tam === selectedSize ? 'active-row' : ''}">
-                  <td>${m.tam}</td><td>${m.altura}</td><td>${m.peito}</td><td>${m.cintura}</td>
-                </tr>`).join('')}
+                <tr><td>${m.tam}</td><td>${m.altura}</td><td>${m.peito}</td><td>${m.cintura}</td></tr>
+              `).join('')}
             </tbody>
           </table>
         </details>
 
-        <!-- NOME -->
+        <!-- CAMPO DE NOME -->
         <div class="pp-name-wrap">
-          <input type="text" id="ppName" class="pp-name-input" placeholder="Seu nome (opcional)" oninput="updatePageWppBtn()">
+          <input type="text" id="ppName" class="pp-name-input"
+            placeholder="Seu nome (opcional)" oninput="updatePageWppBtn()">
         </div>
 
-        <!-- BOTÃO WPP FIXO -->
-        <a class="pp-wpp-btn" id="ppWppBtn" href="#" target="_blank">
-          💬 Comprar pelo WhatsApp
-        </a>
+        <!-- BOTÕES -->
+        <div class="pp-actions">
+          <button class="pp-cart-btn" onclick="handleAddToCart()">
+            🛒 Adicionar ao carrinho
+          </button>
+          <a class="pp-wpp-btn" id="ppWppBtn" href="#" target="_blank">
+            💬 Comprar pelo WhatsApp
+          </a>
+        </div>
+
+        <!-- VOLTAR -->
+        <button class="pp-back-btn" onclick="closePage()">← Voltar ao catálogo</button>
       </div>
 
     </div>
 
-    <!-- ZOOM OVERLAY -->
+    <!-- ZOOM -->
     <div class="pp-zoom-overlay" id="ppZoom" onclick="closeZoom()">
       <img id="ppZoomImg" src="" alt="">
     </div>
@@ -347,6 +468,14 @@ function openModal(id) {
   updatePageWppBtn();
   page.classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+function handleAddToCart() {
+  if (!selectedSize) {
+    showCartToast('⚠️ Selecione um tamanho primeiro');
+    return;
+  }
+  addToCart(currentProduct, selectedSize);
 }
 
 function setGalleryImg(i) {
@@ -360,7 +489,6 @@ function selectPageSize(s, btn) {
   selectedSize = s;
   document.querySelectorAll('.pp-size-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
-  // Highlight linha da tabela
   document.querySelectorAll('.pp-table tbody tr').forEach((tr, i) => {
     tr.classList.toggle('active-row', medidas[i]?.tam === s);
   });
@@ -369,6 +497,7 @@ function selectPageSize(s, btn) {
 
 function updatePageWppBtn() {
   const p    = currentProduct;
+  if (!p) return;
   const nome = document.getElementById('ppName')?.value.trim() || '';
   const saudacao = nome ? `Olá, meu nome é *${nome}*!` : 'Olá!';
   const msg  = encodeURIComponent(
@@ -386,9 +515,8 @@ function zoomImg(img) {
   document.getElementById('ppZoomImg').src = img.src;
   zoom.classList.add('open');
 }
-
 function closeZoom() {
-  document.getElementById('ppZoom').classList.remove('open');
+  document.getElementById('ppZoom')?.classList.remove('open');
 }
 
 function closePage() {
@@ -396,7 +524,6 @@ function closePage() {
   document.body.style.overflow = '';
 }
 
-// Manter compatibilidade com quickBuy dos cards
 function quickBuy(id) {
   const p   = produtos.find(x => x.id === id);
   const msg = encodeURIComponent(
@@ -417,10 +544,7 @@ function closeModalBtn() { closePage(); }
    TECLADO
 ══════════════════════ */
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeZoom();
-    closePage();
-  }
+  if (e.key === 'Escape') { closeZoom(); closePage(); closeCart(); }
 });
 
 /* ══════════════════════
@@ -428,5 +552,6 @@ document.addEventListener('keydown', e => {
 ══════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
   renderGrid();
+  renderCart();
   resetQSTimer();
 });

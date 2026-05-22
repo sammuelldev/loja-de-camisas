@@ -3,7 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arquibancada Store</title>
+  <title>Arquibancada Store — Camisas Premium de Futebol</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Camisas dos maiores clubes do mundo. Qualidade premium, atendimento via WhatsApp e pagamento no Pix com desconto.">
+  <meta name="keywords" content="camisas de futebol, camisas premium, futebol, Brasileirão, Premier League, La Liga, Bundesliga, Ligue 1, Série A, Seleções">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Arquibancada Store — Camisas Premium de Futebol">
+  <meta property="og:description" content="Camisas dos maiores clubes do mundo. Qualidade premium, atendimento via WhatsApp e Pix com desconto.">
+  <meta property="og:image" content="hero-bg.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Arquibancada Store — Camisas Premium de Futebol">
+  <meta name="twitter:description" content="Camisas dos maiores clubes do mundo. Qualidade premium e atendimento pelo WhatsApp.">
+  <meta name="twitter:image" content="hero-bg.jpg">
+
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -109,7 +128,6 @@
   <!-- QUEM SOMOS -->
   <section class="quem-somos">
     <div class="qs-track" id="qsTrack">
-
       <div class="qs-slide" style="--slide-bg: url('qs-1.jpg')">
         <div class="qs-overlay"></div>
         <div class="qs-content">
@@ -118,7 +136,6 @@
           <a class="qs-btn" href="#catalogo" onclick="scrollToCatalog()">Ver Catálogo</a>
         </div>
       </div>
-
       <div class="qs-slide" style="--slide-bg: url('qs-2.jpg')">
         <div class="qs-overlay"></div>
         <div class="qs-content">
@@ -127,7 +144,6 @@
           <a class="qs-btn" href="#catalogo" onclick="scrollToCatalog()">Ver Catálogo</a>
         </div>
       </div>
-
       <div class="qs-slide" style="--slide-bg: url('qs-3.jpg')">
         <div class="qs-overlay"></div>
         <div class="qs-content">
@@ -136,7 +152,6 @@
           <a class="qs-btn" href="https://wa.me/5581998628808" target="_blank">Falar no WhatsApp</a>
         </div>
       </div>
-
       <div class="qs-slide" style="--slide-bg: url('qs-4.jpg')">
         <div class="qs-overlay"></div>
         <div class="qs-content">
@@ -145,7 +160,6 @@
           <a class="qs-btn" href="#catalogo" onclick="scrollToCatalog()">Ver Catálogo</a>
         </div>
       </div>
-
     </div>
     <button class="qs-arrow qs-prev" onclick="slideQS(-1)" aria-label="Anterior">&#8592;</button>
     <button class="qs-arrow qs-next" onclick="slideQS(1)" aria-label="Próximo">&#8594;</button>
@@ -161,8 +175,8 @@
   <div class="main" id="catalogo">
     <div class="section-header">
       <div class="section-left">
-        <span class="section-eyebrow">🛍️ Catálogo</span>
-        <div class="section-title">TODOS OS PRODUTOS</div>
+        <span class="section-eyebrow" id="catalogEyebrow">🛍️ Catálogo</span>
+        <div class="section-title" id="catalogTitle">TODOS OS PRODUTOS</div>
       </div>
       <div class="count" id="countLabel">0 produtos</div>
     </div>
@@ -182,38 +196,13 @@
     </a>
   </footer>
 
-  <!-- MODAL -->
-  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
-    <div class="modal">
-      <button class="modal-close" onclick="closeModalBtn()">✕</button>
-      <div class="modal-img-wrap">
-        <img id="modalImg" src="" alt="">
-      </div>
-      <div class="modal-info">
-        <div class="modal-liga" id="modalLiga"></div>
-        <div class="modal-team" id="modalTeam"></div>
-        <div class="modal-title" id="modalTitle"></div>
-        <div class="modal-prices">
-          <div class="modal-price-row">
-            <span class="modal-price-label">💳 Cartão</span>
-            <div>
-              <span class="modal-price-val">R$ 109,99</span>
-              <span class="modal-price-sub">até 3x</span>
-            </div>
-          </div>
-          <div class="modal-price-row">
-            <span class="modal-price-label">💸 Pix</span>
-            <span class="modal-price-val pix">R$ 99,99</span>
-          </div>
-        </div>
-        <div class="size-label">Escolha o tamanho</div>
-        <div class="sizes" id="modalSizes"></div>
-        <a class="btn-wpp-modal" id="modalWppBtn" href="#" target="_blank">
-          💬 Comprar pelo WhatsApp
-        </a>
-      </div>
-    </div>
-  </div>
+  <!-- BOTÃO FLUTUANTE WHATSAPP -->
+  <a class="wpp-float" href="https://wa.me/5581998628808" target="_blank" aria-label="Falar no WhatsApp">
+    <img src="icon-wpp.png" alt="WhatsApp">
+  </a>
+
+  <!-- PÁGINA DO PRODUTO (substitui o modal antigo) -->
+  <div class="product-page" id="productPage"></div>
 
   <script src="produtos.js"></script>
   <script src="script.js"></script>

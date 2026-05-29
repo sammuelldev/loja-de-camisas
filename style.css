@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -41,7 +41,7 @@ nav {
 }
 
 .logo-img-wrap { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-.nav-logo { height: 52px; width: auto; object-fit: contain; }
+.nav-logo { height: 58px; width: auto; object-fit: contain; }
 
 .nav-links { display: flex; align-items: center; gap: 6px; }
 .nav-links a {
@@ -103,21 +103,29 @@ nav {
   padding: 0 80px; max-width: 640px;
 }
 .hero-logo-wrap { margin-bottom: 24px; }
-.hero-logo { height: 110px; width: auto; object-fit: contain; }
+.hero-logo { height: 130px; width: auto; object-fit: contain; }
 .hero-content p {
-  color: rgba(255,255,255,0.5); font-size: 15px;
-  line-height: 1.7; margin-bottom: 32px; max-width: 380px;
+  color: rgba(255,255,255,0.5); font-size: 16px;
+  line-height: 1.75; margin-bottom: 32px; max-width: 380px;
+  font-family: 'Outfit', sans-serif; font-weight: 400;
+  letter-spacing: 0.2px;
 }
 .hero-badges { display: flex; gap: 10px; flex-wrap: wrap; }
 .badge {
-  display: flex; align-items: center; gap: 6px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 100px; padding: 7px 16px;
-  font-size: 12px; color: rgba(255,255,255,0.6);
-  font-weight: 500; backdrop-filter: blur(10px);
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px; padding: 9px 20px;
+  font-size: 13px; color: rgba(255,255,255,0.6);
+  font-weight: 500; backdrop-filter: blur(12px);
+  letter-spacing: 0.3px;
+  font-family: 'Outfit', sans-serif;
 }
-.badge.green { border-color: rgba(0,230,118,0.3); color: var(--green); background: rgba(0,230,118,0.05); }
+.badge.green {
+  border-color: rgba(0,230,118,0.25);
+  color: var(--green);
+  background: rgba(0,230,118,0.04);
+}
 
 /* ══════════════════════════════
    FILTER BAR
@@ -134,11 +142,11 @@ nav {
 
 .filter-btn {
   display: flex; align-items: center; justify-content: center;
-  padding: 8px 14px; height: 48px; min-width: 48px;
+  padding: 8px 16px; height: 44px; min-width: 48px;
   background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border); border-radius: 12px;
-  color: var(--muted); font-size: 11px; font-weight: 700;
-  letter-spacing: 1.5px; text-transform: uppercase;
+  border: 1px solid var(--border); border-radius: 10px;
+  color: var(--muted); font-size: 10px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
   cursor: pointer; white-space: nowrap;
   transition: all 0.25s; font-family: 'Inter', sans-serif;
   flex-shrink: 0;
@@ -296,8 +304,9 @@ nav {
 }
 .section-left { display: flex; flex-direction: column; gap: 6px; }
 .section-eyebrow {
-  font-size: 10px; font-weight: 700; letter-spacing: 3px;
+  font-size: 10px; font-weight: 600; letter-spacing: 2px;
   text-transform: uppercase; color: var(--green);
+  opacity: 0.85;
 }
 .section-title {
   font-family: 'Bebas Neue', sans-serif;
@@ -1274,4 +1283,155 @@ nav { animation: fadeSlideUp 0.5s ease both; }
   .cart-drawer { width: 100vw; }
   .nav-right { gap: 8px; }
   .nav-cart-btn { width: 38px; height: 38px; font-size: 16px; }
+}
+
+/* ══════════════════════════════
+   SISTEMA DE TEMAS DINÂMICOS
+   Variáveis sobrescritas via JS por liga
+══════════════════════════════ */
+
+/* Transição global suave ao trocar de tema */
+*,
+body,
+nav,
+.hero-bg,
+.hero-overlay,
+.filter-btn,
+.filter-btn.active,
+.card,
+.card:hover,
+.btn-wpp,
+.wpp-float,
+.cart-checkout-btn,
+.pp-wpp-btn,
+.pp-cart-btn,
+.qs-dot.active,
+.page-btn.active,
+.modal-liga,
+.pp-liga,
+.card-tipo,
+.price-pix,
+.cart-total,
+.section-eyebrow,
+.nav-links a.active .liga-icon,
+.wpp-notice-title {
+  transition-property: color, background, background-color, border-color, box-shadow, filter;
+  transition-duration: 0.6s;
+  transition-timing-function: ease;
+}
+
+/* ══════════════════════════════
+   PARTÍCULAS
+══════════════════════════════ */
+#particulas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+@keyframes particulaSubir {
+  0%   { transform: translateY(0) scale(1); opacity: 0.6; }
+  50%  { opacity: 0.3; }
+  100% { transform: translateY(-100vh) scale(0.3); opacity: 0; }
+}
+
+/* ══════════════════════════════
+   LABEL DA LIGA NO HERO
+══════════════════════════════ */
+#heroLigaLabel {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 12px;
+  opacity: 0;
+  transition: opacity 0.5s ease, color 0.6s ease;
+  display: block;
+}
+
+/* ══════════════════════════════
+   FLASH DE TRANSIÇÃO
+══════════════════════════════ */
+#ligaFlash {
+  position: fixed; inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════
+   GLOW DINÂMICO NOS CARDS
+══════════════════════════════ */
+.card:hover {
+  border-color: rgba(var(--cor-rgb, 0, 230, 118), 0.35);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5),
+              0 0 40px rgba(var(--cor-rgb, 0, 230, 118), 0.08);
+}
+
+/* ══════════════════════════════
+   GLOW DINÂMICO NO BOTÃO FLOAT
+══════════════════════════════ */
+.wpp-float {
+  box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+}
+
+/* ══════════════════════════════
+   FILTER BTN ATIVO COM COR DO TEMA
+══════════════════════════════ */
+.filter-btn.active {
+  background: rgba(var(--cor-rgb, 0, 230, 118), 0.08);
+  border-color: rgba(var(--cor-rgb, 0, 230, 118), 0.4);
+  box-shadow: 0 0 20px rgba(var(--cor-rgb, 0, 230, 118), 0.15);
+}
+
+/* ══════════════════════════════
+   SCROLLBAR COM COR DO TEMA
+══════════════════════════════ */
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--cor-rgb, 0, 230, 118), 0.2);
+}
+
+/* ══════════════════════════════
+   SEARCH BOX FOCUS COM COR DO TEMA
+══════════════════════════════ */
+.search-box:focus-within {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px rgba(var(--cor-rgb, 0, 230, 118), 0.1);
+}
+
+/* ══════════════════════════════
+   BADGE DO CARRINHO COM COR DO TEMA
+══════════════════════════════ */
+.cart-badge { background: var(--green); }
+
+/* ══════════════════════════════
+   AVISO WPP COM COR DO TEMA
+══════════════════════════════ */
+.wpp-notice-inner {
+  border-color: rgba(var(--cor-rgb, 0, 230, 118), 0.2);
+  background: linear-gradient(135deg,
+    rgba(var(--cor-rgb, 0, 230, 118), 0.05) 0%,
+    transparent 100%);
+}
+
+/* ══════════════════════════════
+   QS DOT ATIVO COM COR DO TEMA
+══════════════════════════════ */
+.qs-dot.active { background: var(--green); }
+
+/* ══════════════════════════════
+   LIGA TAG NOS CARDS COM COR DO TEMA
+══════════════════════════════ */
+.pp-thumb.active {
+  border-color: var(--green);
+  box-shadow: 0 0 16px rgba(var(--cor-rgb, 0, 230, 118), 0.2);
+}
+
+/* ══════════════════════════════
+   MOBILE
+══════════════════════════════ */
+@media (max-width: 768px) {
+  #particulas { display: none; } /* performance no mobile */
 }

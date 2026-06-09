@@ -26,7 +26,7 @@ function addToCart(product, size) {
   if (existing) {
     existing.qty++;
   } else {
-    cart.push({ id: product.id, time: product.time, nome: product.nome, img: product.img, size, qty: 1, price: 99.99 });
+    cart.push({ id: product.id, time: product.time, nome: product.nome, img: product.img, size, qty: 1, price: product.precoPix || 99.99 });
   }
   renderCart();
   openCart();
@@ -229,6 +229,7 @@ function setFilter(liga, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
+
   updateHeroBg(liga);
   updateSectionsVisibility(liga);
   updateCatalogTitle(liga);
@@ -310,8 +311,8 @@ function renderGrid() {
           <div class="card-tipo">${tipoLabel(p.tipo)}</div>
           <div class="card-footer">
             <div>
-              <div class="price-pix">R$ 99,99 <span class="price-label-small">no Pix</span></div>
-              <div class="price-card">R$ 109,99 · até 3x no cartão</div>
+              <div class="price-pix">R$ ${p.precoPix.toFixed(2).replace('.',',')} <span class="price-label-small">no Pix</span></div>
+              <div class="price-card">R$ ${p.precoCartao.toFixed(2).replace('.',',')} · até 3x no cartão</div>
             </div>
             <button class="btn-wpp" onclick="event.stopPropagation(); quickBuy(${p.id})">
               💬 Comprar
@@ -405,12 +406,12 @@ function openModal(id) {
         <div class="pp-prices">
           <div class="pp-price-row">
             <span class="pp-price-label">💸 Pix</span>
-            <span class="pp-price-val green">R$ 99,99</span>
+            <span class="pp-price-val green">R$ ${(p.precoPix || 99.99).toFixed(2).replace('.',',')}</span>
           </div>
           <div class="pp-price-row">
             <span class="pp-price-label">💳 Cartão</span>
             <div>
-              <span class="pp-price-val">R$ 109,99</span>
+              <span class="pp-price-val">R$ ${(p.precoCartao || 109.99).toFixed(2).replace('.',',')}</span>
               <span class="pp-price-sub">até 3x sem juros</span>
             </div>
           </div>

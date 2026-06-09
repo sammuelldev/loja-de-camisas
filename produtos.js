@@ -3,7 +3,7 @@ const produtos = [
   // ── BRASILEIRÃO ───────────────────────────────────────
   {
     id: 1, liga: 'brasileirao', ligaLabel: 'Brasileirão',
-    time: 'Palmeiras', nome: 'Camisa Home 24/25', tipo: 'Home',
+    time: 'Palmeiras', nome: 'Camisa Home 24/25', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/palmeiras-titular.jpg',
     imgs: [
       'img camisas/palmeiras-titular.jpg',
@@ -13,7 +13,7 @@ const produtos = [
   },
   {
     id: 2, liga: 'brasileirao', ligaLabel: 'Brasileirão',
-    time: 'Palmeiras', nome: 'Camisa Away 24/25', tipo: 'Away',
+    time: 'Palmeiras', nome: 'Camisa Away 24/25', tipo: 'Away', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/palmeiras-away.jpg',
     imgs: [
       'img camisas/palmeiras-away.jpg',
@@ -22,7 +22,7 @@ const produtos = [
   },
   {
     id: 3, liga: 'brasileirao', ligaLabel: 'Brasileirão',
-    time: 'Flamengo', nome: 'Camisa Home 24/25', tipo: 'Home',
+    time: 'Flamengo', nome: 'Camisa Home 24/25', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/flamengo-titular.jpg',
     imgs: [
       'img camisas/flamengo-titular.jpg',
@@ -31,7 +31,7 @@ const produtos = [
   },
   {
     id: 4, liga: 'brasileirao', ligaLabel: 'Brasileirão',
-    time: 'Flamengo', nome: 'Camisa Away 24/25', tipo: 'Away',
+    time: 'Flamengo', nome: 'Camisa Away 24/25', tipo: 'Away', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/flamengo-away.jpg',
     imgs: [
       'img camisas/flamengo-away.jpg',
@@ -42,7 +42,7 @@ const produtos = [
   // ── LA LIGA ───────────────────────────────────────────
   {
     id: 5, liga: 'laliga', ligaLabel: 'La Liga',
-    time: 'Real Madrid', nome: 'Camisa Home 24/25', tipo: 'Home',
+    time: 'Real Madrid', nome: 'Camisa Home 24/25', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/real-madrid-titular.jpg',
     imgs: [
       'img camisas/real-madrid-titular.jpg',
@@ -51,7 +51,7 @@ const produtos = [
   },
   {
     id: 6, liga: 'laliga', ligaLabel: 'La Liga',
-    time: 'Real Madrid', nome: 'Camisa Away 24/25', tipo: 'Away',
+    time: 'Real Madrid', nome: 'Camisa Away 24/25', tipo: 'Away', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/real-madrid-away.jpg',
     imgs: [
       'img camisas/real-madrid-away.jpg',
@@ -60,7 +60,7 @@ const produtos = [
   },
   {
     id: 7, liga: 'laliga', ligaLabel: 'La Liga',
-    time: 'Barcelona', nome: 'Camisa Home 24/25', tipo: 'Home',
+    time: 'Barcelona', nome: 'Camisa Home 24/25', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/barcelona-titular.jpg',
     imgs: [
       'img camisas/barcelona-titular.jpg',
@@ -69,7 +69,7 @@ const produtos = [
   },
   {
     id: 8, liga: 'laliga', ligaLabel: 'La Liga',
-    time: 'Barcelona', nome: 'Camisa Away 24/25', tipo: 'Away',
+    time: 'Barcelona', nome: 'Camisa Away 24/25', tipo: 'Away', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/barcelona-away.jpg',
     imgs: [
       'img camisas/barcelona-away.jpg',
@@ -80,7 +80,7 @@ const produtos = [
   // ── PREMIER LEAGUE ────────────────────────────────────
   {
     id: 9, liga: 'premier', ligaLabel: 'Premier League',
-    time: 'Manchester City', nome: 'Camisa Home 24/25', tipo: 'Home',
+    time: 'Manchester City', nome: 'Camisa Home 24/25', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/manchester-city-titular.jpg',
     imgs: [
       'img camisas/manchester-city-titular.jpg',
@@ -89,7 +89,7 @@ const produtos = [
   },
   {
     id: 10, liga: 'premier', ligaLabel: 'Premier League',
-    time: 'Arsenal', nome: 'Camisa Home 24/25', tipo: 'Home',
+    time: 'Arsenal', nome: 'Camisa Home 24/25', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/arsenal-titular.jpg',
     imgs: [
       'img camisas/arsenal-titular.jpg',
@@ -98,7 +98,7 @@ const produtos = [
   },
   {
     id: 11, liga: 'premier', ligaLabel: 'Premier League',
-    time: 'Chelsea', nome: 'Camisa Home 24/25', tipo: 'Home',
+    time: 'Chelsea', nome: 'Camisa Home 24/25', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/chelsea-titular.jpg',
     imgs: [
       'img camisas/chelsea-titular.jpg',
@@ -109,7 +109,7 @@ const produtos = [
   // ── BUNDESLIGA ────────────────────────────────────────
   {
     id: 12, liga: 'bundesliga', ligaLabel: 'Bundesliga',
-    time: 'Bayern de Munique', nome: 'Camisa Home 24/25', tipo: 'Home',
+    time: 'Bayern de Munique', nome: 'Camisa Home 24/25', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/bayern-titular.jpg',
     imgs: [
       'img camisas/bayern-titular.jpg',
@@ -118,7 +118,7 @@ const produtos = [
   },
   {
     id: 13, liga: 'bundesliga', ligaLabel: 'Bundesliga',
-    time: 'Bayern de Munique', nome: 'Camisa Away 24/25', tipo: 'Away',
+    time: 'Bayern de Munique', nome: 'Camisa Away 24/25', tipo: 'Away', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/bayern-away.jpg',
     imgs: [
       'img camisas/bayern-away.jpg',
@@ -129,7 +129,7 @@ const produtos = [
   // ── SELEÇÕES ──────────────────────────────────────────
   {
     id: 14, liga: 'selecoes', ligaLabel: 'Seleções',
-    time: 'Brasil', nome: 'Camisa Home 2026', tipo: 'Home',
+    time: 'Brasil', nome: 'Camisa Home 2026', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/brasil-titular.jpg',
     imgs: [
       'img camisas/brasil-titular.jpg',
@@ -138,7 +138,7 @@ const produtos = [
   },
   {
     id: 15, liga: 'selecoes', ligaLabel: 'Seleções',
-    time: 'Argentina', nome: 'Camisa Home 2026', tipo: 'Home',
+    time: 'Argentina', nome: 'Camisa Home 24/25', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/argentina-titular.jpg',
     imgs: [
       'img camisas/argentina-titular.jpg',
@@ -147,7 +147,7 @@ const produtos = [
   },
   {
     id: 16, liga: 'selecoes', ligaLabel: 'Seleções',
-    time: 'Inglaterra', nome: 'Camisa Home 24/25', tipo: 'Home',
+    time: 'Inglaterra', nome: 'Camisa Home 24/25', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/inglaterra-titular.jpg',
     imgs: [
       'img camisas/inglaterra-titular.jpg',
@@ -156,7 +156,7 @@ const produtos = [
   },
   {
     id: 17, liga: 'selecoes', ligaLabel: 'Seleções',
-    time: 'Espanha', nome: 'Camisa Home 24/25', tipo: 'Home',
+    time: 'Espanha', nome: 'Camisa Home 24/25', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/espanha-titular.jpg',
     imgs: [
       'img camisas/espanha-titular.jpg',
@@ -165,7 +165,7 @@ const produtos = [
   },
   {
     id: 18, liga: 'selecoes', ligaLabel: 'Seleções',
-    time: 'Portugal', nome: 'Camisa Home 24/25', tipo: 'Home',
+    time: 'Portugal', nome: 'Camisa Home 24/25', tipo: 'Home', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/portugal-titular.jpg',
     imgs: [
       'img camisas/portugal-titular.jpg',
@@ -174,7 +174,7 @@ const produtos = [
   },
   {
     id: 19, liga: 'selecoes', ligaLabel: 'Seleções',
-    time: 'Alemanha', nome: 'Camisa Retrô 1990', tipo: 'Retrô',
+    time: 'Alemanha', nome: 'Camisa Retrô 1990', tipo: 'Retrô', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/alemanha-titular.jpg',
     imgs: [
       'img camisas/alemanha-titular.jpg',
@@ -183,7 +183,7 @@ const produtos = [
   },
   {
     id: 20, liga: 'selecoes', ligaLabel: 'Seleções',
-    time: 'França', nome: 'Camisa Retrô 1998', tipo: 'Retrô',
+    time: 'França', nome: 'Camisa Retrô 1998', tipo: 'Retrô', precoPix: 99.99, precoCartao: 109.99,
     img: 'img camisas/franca-titular.jpg',
     imgs: [
       'img camisas/franca-titular.jpg',
